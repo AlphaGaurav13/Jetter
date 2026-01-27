@@ -98,11 +98,6 @@ JETTER is a **secure, scalable, and intelligent expense tracking web application
 - Razorpay / Stripe (Payments)
 - Socket.IO (Real-Time Features)
 
----
-
-## 📁 Project Structure
-
-
 
 ---
 
