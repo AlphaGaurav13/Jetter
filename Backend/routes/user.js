@@ -6,27 +6,39 @@ import User from "../models/userModel.js";
 const router = express.Router();
 
 const signupSchema = z.object({
-    email: z.string().email(),
-    password: z.string().min(6)
+    username: z.string().min(3).max(9),
+    password: z.string().min(8),
+    firstName: z.string().max(9),
+    lastName: z.string().max(9)
 });
 
 router.post("/signup", async (req, res) => {
     try {
         const parsed = signupSchema.safeParse(req.body);
 
+        console.log("Incoming body:", req.body);
+        console.log("Parsed result:", parsed);
+
         if (!parsed.success) {
             return res.status(400).json({ message: "Invalid inputs" });
         }
 
-        const { email, password } = parsed.data;
+        const { username, password, firstName, lastName } = parsed.data;
 
-        const existingUser = await User.findOne({ email });
+        const existingUser = await User.findOne({ username });
 
         if (existingUser) {
             return res.status(409).json({ message: "User Already Exists" });
         }
 
-        const user = await User.create({ email, password });
+        const user = await User.create({
+            username,
+            password,
+            firstName,
+            lastName
+        });
+
+        console.log("User created in DB:", user);
 
         const token = jwt.sign(
             { userId: user._id },
@@ -36,8 +48,10 @@ router.post("/signup", async (req, res) => {
         res.json({ token });
 
     } catch (err) {
-        res.status(500).json({ message: "Server Error" });
+        console.error("ERROR:", err);
+        res.status(500).json({ message: err.message });
     }
 });
+
 
 export default router;
