@@ -2,6 +2,7 @@ import express from "express";
 import { z } from "zod";
 import jwt from "jsonwebtoken";
 import User from "../models/userModel.js";
+import Account from "../models/accountModel.js";
 
 const router = express.Router();
 
@@ -36,6 +37,11 @@ router.post("/signup", async (req, res) => {
             password,
             firstName,
             lastName
+        });
+
+        await Account.create({
+            userId: user._id,
+            balance: 1000   
         });
 
         console.log("User created in DB:", user);
