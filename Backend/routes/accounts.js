@@ -3,7 +3,7 @@ const express = require('express');
 const { authMiddleware } = require('../middleware');
 const { Account } = require('../db');
 const { default: mongoose } = require('mongoose');
-
+// import Account from "../models/accountModel.js";
 const router = express.Router();
 
 router.get("/balance", authMiddleware, async (req, res) => {
