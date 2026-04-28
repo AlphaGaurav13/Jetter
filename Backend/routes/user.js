@@ -7,11 +7,12 @@ import Account from "../models/accountModel.js";
 const router = express.Router();
 
 const signupSchema = z.object({
-    username: z.string().min(3).max(9),
+    username: z.string().min(3).max(50),
     password: z.string().min(8),
-    firstName: z.string().max(9),
-    lastName: z.string().max(9)
+    firstName: z.string().min(1).max(50),
+    lastName: z.string().min(1).max(50)
 });
+
 
 router.post("/signup", async (req, res) => {
     try {

@@ -10,7 +10,7 @@ const UserSchema = new Schema({
         trim: true,
         lowercase: true,
         minlength: 3,
-        maxlength: 9
+        maxlength: 50
     },
     password : {
         type: String,
@@ -21,15 +21,15 @@ const UserSchema = new Schema({
         type: String,
         required: true,
         trim: true,
-        maxlength: 9
+        maxlength: 50
     },
     lastName : {
         type: String,
         required: true,
         trim: true,
-        maxlength: 9
+        maxlength: 50
     }
-});
+}, { timestamps: true });
 
 const User = mongoose.model("User", UserSchema);
 
