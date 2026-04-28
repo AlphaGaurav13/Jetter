@@ -18,7 +18,7 @@ export function AiAssistant() {
         const token = localStorage.getItem('token') || "";
 
         try {
-            const response = await fetch("http://localhost:3000/api/v1/ai/chat", {
+            const response = await fetch("https://jetter.onrender.com/api/v1/ai/chat", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
